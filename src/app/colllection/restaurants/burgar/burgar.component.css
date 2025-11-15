@@ -1,0 +1,329 @@
+@charset "UTF-8";
+.restaurant-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #a8b6c8 100%);
+  min-height: 100vh;
+  position: relative;
+  animation: fadeInUp 1s ease-out;
+}
+
+.restaurant-detail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(255, 126, 139, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.04"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.04"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.03"/><circle cx="10" cy="50" r="0.5" fill="%23ffffff" opacity="0.03"/><circle cx="90" cy="30" r="0.5" fill="%23ffffff" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+  animation: backgroundFloat 20s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(10px, -10px) rotate(1deg);
+  }
+  66% {
+    transform: translate(-10px, 10px) rotate(-1deg);
+  }
+}
+.restaurant-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 254, 254, 0.9) 100%);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 8px solid #ff7e8b;
+  position: relative;
+  overflow: hidden;
+  animation: slideInFromLeft 0.8s ease-out;
+}
+
+.restaurant-header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 126, 139, 0.08) 0%, transparent 40%), radial-gradient(circle at 30% 70%, rgba(52, 152, 219, 0.06) 0%, transparent 50%);
+  animation: float 8s ease-in-out infinite;
+}
+
+.restaurant-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(270deg) scale(1.05);
+  }
+}
+@keyframes shimmer {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+.restaurant-image {
+  width: 200px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  margin-right: 25px;
+  border: 2px solid #e9ecef;
+}
+
+.restaurant-info h1 {
+  margin: 0 0 12px 0;
+  color: #2c3e50;
+  font-size: 2.2em;
+  font-weight: 600;
+}
+
+.rating, .cuisine {
+  margin: 6px 0;
+  font-size: 1.1em;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.rating::before {
+  content: "⭐";
+  margin-right: 8px;
+  color: #ffd700;
+}
+
+.cuisine::before {
+  content: "🍽️";
+  margin-right: 8px;
+}
+
+.restaurant-description {
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-description h2 {
+  color: #2c3e50;
+  margin-bottom: 12px;
+  font-size: 1.6em;
+  font-weight: 600;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.restaurant-description p {
+  line-height: 1.7;
+  color: #555;
+  font-size: 1em;
+}
+
+.restaurant-menu {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.restaurant-menu h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 1.6em;
+  font-weight: 600;
+  border-bottom: 2px solid #e74c3c;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-item {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #ff7e8b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-item:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.menu-item-content {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.menu-item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.menu-item-image {
+  width: 120px;
+  height: 90px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.menu-item-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item h3 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.price {
+  font-weight: bold;
+  color: #e74c3c;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  background-color: #ffeaea;
+  padding: 4px 8px;
+  border-radius: 15px;
+  display: inline-block;
+}
+
+.menu-item .description {
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95em;
+}
+
+.add-to-cart-btn {
+  background: linear-gradient(135deg, #ff7e8b 0%, #ff6b8a 25%, #ff5a7a 50%, #ff4970 75%, #ff385f 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(255, 126, 139, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #e74c3c 0%, #ff4757 25%, #ff3742 50%, #ff2d35 75%, #ff1f29 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 126, 139, 0.4);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 126, 139, 0.2);
+}
+
+.add-to-cart-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 126, 139, 0.3);
+}
+
+@media (max-width: 768px) {
+  .restaurant-detail {
+    padding: 15px;
+  }
+  .restaurant-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .restaurant-image {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  .restaurant-info h1 {
+    font-size: 1.8em;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  .restaurant-description,
+  .restaurant-menu {
+    padding: 20px;
+  }
+}/*# sourceMappingURL=burgar.component.css.map */

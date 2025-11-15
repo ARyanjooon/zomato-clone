@@ -1,0 +1,21 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">&times;</button>
+    <h2>Log in</h2>
+    <form>
+      <div class="phone-input-container">
+        <div class="country-code-selector">🇮🇳 +91</div>
+        <input type="tel" placeholder="Phone number" class="form-input phone-number-input">
+      </div>
+      <button type="submit" class="submit-btn">Send OTP</button>
+    </form>
+    <div class="divider">or</div>
+    <button class="social-login-btn google">
+      <i class="fab fa-google"></i> Continue with Google
+    </button>
+    <button class="social-login-btn email">
+      <i class="fas fa-envelope"></i> Continue with Email
+    </button>
+    <p class="signup-link">New to Zomato? <a (click)="onSignupClick()">Create account</a></p>
+  </div>
+</div>

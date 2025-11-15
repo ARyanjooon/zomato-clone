@@ -1,0 +1,25 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">&times;</button>
+    <h2>Sign Up</h2>
+    <form>
+      <input type="text" placeholder="Full Name" class="form-input">
+      <div class="phone-input-container">
+        <div class="country-code-selector">🇮🇳 +91</div>
+        <input type="tel" placeholder="Phone number" class="form-input phone-number-input">
+      </div>
+      <input type="email" placeholder="Email" class="form-input">
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+    <div class="divider">or</div>
+    <button class="social-login-btn google">
+      <i class="fab fa-google"></i> Continue with Google
+    </button>
+    <button class="social-login-btn email">
+      <i class="fas fa-envelope"></i> Continue with Email
+    </button>
+    <nav>
+   <p class="login-link">Already have an account? <a (click)="onLoginClick()">Log in</a></p>
+</nav>
+  </div>
+</div>

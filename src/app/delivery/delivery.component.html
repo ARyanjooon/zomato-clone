@@ -1,0 +1,94 @@
+
+
+<div class="quick-filters-container">
+  <button class="quick-filter-btn" (click)="openFilterModal()">
+    <i class="fas fa-filter"></i> Filters
+  </button>
+  <button class="quick-filter-btn">Pure Veg</button>
+  <button class="quick-filter-btn">
+    Cuisines <i class="fas fa-chevron-down"></i>
+  </button>
+</div>
+<div class="delivery-container">
+  <main class="main-content">
+    <section class="inspiration-section">
+      <h2>Inspiration for your first order</h2>
+      <div class="inspiration-slider">
+        <button class="slider-btn prev-btn" (click)="scrollInspiration('prev')"><</button>
+        <div class="inspiration-grid" #inspirationGrid>
+          <div *ngFor="let item of inspirationItems" class="inspiration-card inspiration-item">
+            <img [src]="item.image" [alt]="item.name" class="card-image">
+            <h3 class="card-title">{{ item.name }}</h3>
+          </div>
+        </div>
+        <button class="slider-btn next-btn" (click)="scrollInspiration('next')">></button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Filter Modal -->
+<div class="modal-overlay" *ngIf="isFilterModalOpen" (click)="closeFilterModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Filters</h2>
+      <button class="close-btn" (click)="closeFilterModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="filter-categories">
+        <button class="category-btn" [class.active]="activeFilterCategory === 'sort'" (click)="activeFilterCategory = 'sort'">Sort by</button>
+        <button class="category-btn" [class.active]="activeFilterCategory === 'cuisines'" (click)="activeFilterCategory = 'cuisines'">Cuisines</button>
+        <button class="category-btn" [class.active]="activeFilterCategory === 'rating'" (click)="activeFilterCategory = 'rating'">Rating</button>
+        <button class="category-btn" [class.active]="activeFilterCategory === 'cost'" (click)="activeFilterCategory = 'cost'">Cost per person</button>
+      </div>
+      <div class="filter-options">
+        <div *ngIf="activeFilterCategory === 'sort'" class="filter-section">
+          <div class="sort-options">
+            <label class="sort-option">
+              <input type="radio" name="sortBy" value="popularity" [(ngModel)]="sortBy">
+              Popularity
+            </label>
+            <label class="sort-option">
+              <input type="radio" name="sortBy" value="rating-high-low" [(ngModel)]="sortBy">
+              Rating: High to Low
+            </label>
+            <label class="sort-option">
+              <input type="radio" name="sortBy" value="cost-low-high" [(ngModel)]="sortBy">
+              Cost: Low to High
+            </label>
+            <label class="sort-option">
+              <input type="radio" name="sortBy" value="cost-high-low" [(ngModel)]="sortBy">
+              Cost: High to Low
+            </label>
+          </div>
+        </div>
+        <div *ngIf="activeFilterCategory === 'cuisines'" class="filter-section">
+          <div class="cuisine-search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="cuisine-search-input" placeholder="Search for cuisines" [(ngModel)]="cuisineSearchTerm">
+          </div>
+          <!-- Placeholder for the list of cuisines -->
+          <p class="placeholder-text">Cuisine list will appear here.</p>
+        </div>
+        <div *ngIf="activeFilterCategory === 'rating'" class="filter-section">
+          <h3>Rating</h3>
+          <p class="rating-subtitle">Select a rating</p>
+          <div class="rating-buttons">
+            <button class="rating-btn" [class.active]="selectedRating === 0" (click)="selectedRating = 0">Any</button>
+            <button class="rating-btn" [class.active]="selectedRating === 3.5" (click)="selectedRating = 3.5">3.5+</button>
+            <button class="rating-btn" [class.active]="selectedRating === 4.0" (click)="selectedRating = 4.0">4.0+</button>
+            <button class="rating-btn" [class.active]="selectedRating === 4.5" (click)="selectedRating = 4.5">4.5+</button>
+            <button class="rating-btn" [class.active]="selectedRating === 5.0" (click)="selectedRating = 5.0">5.0</button>
+          </div>
+        </div>
+        <div *ngIf="activeFilterCategory === 'cost'" class="filter-section">
+          <p>Cost per person options will be here.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="clear-btn" (click)="clearFilters()">Clear all</button>
+      <button class="apply-btn" (click)="applyFilters()">Apply</button>
+    </div>
+  </div>
+</div>

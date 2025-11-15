@@ -1,0 +1,14 @@
+<div class="search-container">
+  <h2>Search Results for "{{ query }}"</h2>
+  <div class="restaurants-grid">
+    <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants" (click)="navigateToRestaurant(restaurant.name)">
+      <img [src]="restaurant.image" [alt]="restaurant.name" class="restaurant-image">
+      <h3>{{ restaurant.name }}</h3>
+      <p>Rating: {{ restaurant.rating }}/5</p>
+      <p>Cuisine: {{ restaurant.cuisine }}</p>
+    </div>
+  </div>
+  <div *ngIf="filteredRestaurants.length === 0 && query" class="no-results">
+    <p>No restaurants found for "{{ query }}"</p>
+  </div>
+</div>

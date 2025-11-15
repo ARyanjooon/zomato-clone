@@ -1,0 +1,57 @@
+<header class="header">
+  <div class="header-container">
+    <img src="assets/zomato-logo.avif" alt="Zomato Logo" class="logo">
+    <form class="search-form" *ngIf="!isProfileRoute()" (ngSubmit)="onSearch($event)">
+      <div class="location-container">
+        <i class="fas fa-map-marker-alt location-icon"></i>
+        <input type="text" value="Delhi NCR" class="location-input">
+        <i class="fas fa-caret-down caret-icon"></i>
+      </div>
+      <span class="separator"></span>
+      <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
+      <input type="text" placeholder="Search for restaurant, cuisine or a dish" class="search-input" [(ngModel)]="searchQuery">
+    </form>
+    <div class="auth-buttons">
+      <button class="login-btn" (click)="openLoginModal()">Login</button>
+      <button class="signup-btn" (click)="openSignupModal()">Sign Up</button>
+    </div>
+  </div>
+  <nav >
+    <a routerLink="/"  routerLinkActive="active">Collection</a>
+    <a routerLink="profile" routerLinkActive="active">Profile</a>
+  </nav>
+</header>
+
+<section class="page-options" *ngIf="!isProfileRoute()">
+  <div class="options-container">
+    <div class="option-item" [class.active]="activeOption === 'dining'" (click)="setActive('dining')">
+      <div class="option-icon-bg dining">
+        <img src="assets/dining-icon.png" alt="Dining Out">
+      </div>
+      <span>Dining Out</span>
+    </div>
+    <div class="option-item" [class.active]="activeOption === 'delivery'" (click)="setActive('delivery')">
+      <div class="option-icon-bg delivery">
+        <img src="assets/delivery-icon.png" alt="Delivery">
+      </div>
+      <span>Delivery</span>
+    </div>
+    <div class="option-item" [class.active]="activeOption === 'nightlife'" (click)="setActive('nightlife')">
+      <div class="option-icon-bg nightlife">
+        <img src="assets/nightlife-icon.png" alt="Nightlife">
+      </div>
+      <span>Nightlife</span>
+    </div>
+  </div>
+</section>
+
+<app-login *ngIf="isLoginModalOpen" (close)="closeLoginModal()" (openSignup)="onOpenSignupFromLogin()"></app-login>
+<app-signup *ngIf="isSignupModalOpen" (close)="closeSignupModal()" (openLogin)="onOpenLoginFromSignup()"></app-signup>
+
+<router-outlet />  <!-- Angular inserts your route content here -->
+
+<!-- Test backend connection -->
+<div class="backend-test">
+  <button (click)="testBackend()">Test Backend Connection</button>
+  <p *ngIf="backendMessage">{{ backendMessage }}</p>
+</div>

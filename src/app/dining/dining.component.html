@@ -1,0 +1,73 @@
+<section class="collections-section">
+  <div class="collections-container">
+    <div class="collections-header">
+      <h1>Collections</h1>
+      <p>Explore curated lists of top restaurants, cafes, pubs, and bars in Delhi NCR, based on trends</p>
+      <a href="#">All collections in Delhi NCR</a>
+    </div>
+    <div class="collections-slider" #sliderContainer>
+      <button class="slider-btn prev-btn" (click)="scrollCollections('prev')"><i class="fas fa-chevron-left"></i></button>
+      <div class="collections-grid" #collectionsGrid>
+        <div class="collection-card">
+          <img src="assets/insta-worthy-spots.webp" alt="Insta-worthy spots">
+          <div class="card-content">
+            <h4>Insta-worthy spots</h4>
+            <span>33 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/top-trending-spot.webp" alt="Top trending spots">
+          <div class="card-content">
+            <h4>Top trending spots</h4>
+            <span>29 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/new-in-town.webp" alt="New in town">
+          <div class="card-content">
+            <h4>New in town</h4>
+            <span>39 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/omakase-bars.webp" alt="Omakase bars">
+          <div class="card-content">
+            <h4>Omakase bars</h4>
+            <span>8 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/secret-speakeasy-bars.webp" alt="Secret speakeasy bars">
+          <div class="card-content">
+            <h4>Secret speakeasy bars</h4>
+            <span>12 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/romantic-dining-places.webp" alt="Romantic dining places">
+          <div class="card-content">
+            <h4>Romantic dining places</h4>
+            <span>46 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/best-matcha-spots-in-town.webp" alt="Best matcha spots in town">
+          <div class="card-content">
+            <h4>Best matcha spots in town</h4>
+            <span>20 Places</span>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/refreshing-summer-sips.webp" alt="Refreshing summer sips">
+          <div class="card-content">
+            <h4>Refreshing summer sips</h4>
+            <span>12 Places</span>
+          </div>
+        </div>
+      </div>
+      <button class="slider-btn next-btn" (click)="scrollCollections('next')"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<app-restaurants></app-restaurants>
