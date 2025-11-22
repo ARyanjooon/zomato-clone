@@ -1,25 +1,57 @@
 <div class="modal-overlay" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="closeModal()">&times;</button>
-    <h2>Sign Up</h2>
-    <form>
-      <input type="text" placeholder="Full Name" class="form-input">
-      <div class="phone-input-container">
-        <div class="country-code-selector">🇮🇳 +91</div>
-        <input type="tel" placeholder="Phone number" class="form-input phone-number-input">
+    <div class="modal-header">
+      <h2>Sign Up</h2>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+
+    <form (ngSubmit)="onSignup()">
+      <div class="input-group">
+        <input type="text" placeholder="Full Name" class="form-input" [(ngModel)]="signupData.name" name="name"
+          required>
       </div>
-      <input type="email" placeholder="Email" class="form-input">
-      <button type="submit" class="submit-btn">Create Account</button>
+      <div class="input-group">
+        <input type="email" placeholder="Email" class="form-input" [(ngModel)]="signupData.email" name="email" required>
+      </div>
+      <div class="password-container">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="form-input password-input"
+          [(ngModel)]="signupData.password" name="password" required minlength="6">
+        <button type="button" class="toggle-password" (click)="showPassword = !showPassword"
+          *ngIf="signupData.password">
+          <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+        </button>
+      </div>
+      <div class="password-container">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm Password"
+          class="form-input password-input" [(ngModel)]="signupData.confirmPassword" name="confirmPassword" required>
+        <button type="button" class="toggle-password" (click)="showConfirmPassword = !showConfirmPassword"
+          *ngIf="signupData.confirmPassword">
+          <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
+        </button>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Create Account</span>
+        <div class="spinner" *ngIf="isLoading"></div>
+      </button>
     </form>
+
     <div class="divider">or</div>
+
     <button class="social-login-btn google">
-      <i class="fab fa-google"></i> Continue with Google
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width="20">
+      Continue with Google
     </button>
     <button class="social-login-btn email">
       <i class="fas fa-envelope"></i> Continue with Email
     </button>
-    <nav>
-   <p class="login-link">Already have an account? <a (click)="onLoginClick()">Log in</a></p>
-</nav>
+
+    <div class="footer-text">
+      Already have an account? <a (click)="onLoginClick()">Log in</a>
+    </div>
   </div>
 </div>

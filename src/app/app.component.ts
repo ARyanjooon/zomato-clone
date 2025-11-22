@@ -113,6 +113,10 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.router.url.includes('/profile');
   }
 
+  isRestaurantRoute(): boolean {
+    return ['/burgar', '/biryani', '/taj'].includes(this.router.url);
+  }
+
   isAuthRoute(): boolean {
     return ['/login', '/signup'].includes(this.router.url);
   }

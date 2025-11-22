@@ -1,114 +1,32 @@
 <div class="payment-container">
-  <h2>Payment Details</h2>
-  <div class="total-amount">
-    <h3>Total Amount: ₹{{ totalPrice }}</h3>
-  </div>
+  <h2>Payment Page</h2>
+  <p>Total Price: ₹{{ totalPrice }}</p>
 
-  <div class="payment-methods">
-    <h3>Select Payment Method</h3>
-    <div class="method-options">
-      <div class="method-option" [class.selected]="selectedPaymentMethod === 'credit-card'">
-        <div class="method-header" (click)="togglePaymentMethod('credit-card')">
-          <span class="method-icon">💳</span>
-          <span>Credit/Debit Card</span>
-        </div>
-        <div class="method-content" [class.expanded]="selectedPaymentMethod === 'credit-card'">
-          <form (ngSubmit)="onSubmit()" #form="ngForm" class="payment-form">
-            <div class="form-group">
-              <label for="nameOnCard">Name on Card</label>
-              <input type="text" id="nameOnCard" [(ngModel)]="paymentForm.nameOnCard" name="nameOnCard" required>
-            </div>
-            <div class="form-group">
-              <label for="cardNumber">Card Number</label>
-              <input type="text" id="cardNumber" [(ngModel)]="paymentForm.cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="expiryDate">Expiry Date</label>
-                <input type="text" id="expiryDate" [(ngModel)]="paymentForm.expiryDate" name="expiryDate" placeholder="MM/YY" required>
-              </div>
-              <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" [(ngModel)]="paymentForm.cvv" name="cvv" placeholder="123" required>
-              </div>
-            </div>
+  <form (ngSubmit)="onSubmit()">
+    <label>
+      Card Number:
+      <input type="text" [(ngModel)]="cardNumber" name="cardNumber" required maxlength="16" />
+    </label>
+    <br />
 
-            <button type="submit" [disabled]="!form.valid" class="pay-btn">Pay Now</button>
-          </form>
-        </div>
-      </div>
+    <label>
+      Expiry Date:
+      <input type="text" [(ngModel)]="expiryDate" name="expiryDate" required placeholder="MM/YY" maxlength="5" />
+    </label>
+    <br />
 
-      <div class="method-option" [class.selected]="selectedPaymentMethod === 'upi'">
-        <div class="method-header" (click)="togglePaymentMethod('upi')">
-          <span class="method-icon">📱</span>
-          <span>UPI</span>
-        </div>
-        <div class="method-content" [class.expanded]="selectedPaymentMethod === 'upi'">
-          <div class="upi-apps">
-            <h4>Select UPI App</h4>
-            <div class="upi-app-options">
-              <label class="upi-app-option">
-                <input type="radio" name="upiApp" value="g-pay" [(ngModel)]="selectedUpiApp">
-                <span class="app-icon">💰</span>
-                <span>Google Pay</span>
-              </label>
-              <label class="upi-app-option">
-                <input type="radio" name="upiApp" value="phonepe" [(ngModel)]="selectedUpiApp">
-                <span class="app-icon">📱</span>
-                <span>PhonePe</span>
-              </label>
-              <label class="upi-app-option">
-                <input type="radio" name="upiApp" value="paytm" [(ngModel)]="selectedUpiApp">
-                <span class="app-icon">💳</span>
-                <span>Paytm</span>
-              </label>
-            </div>
-          </div>
-          <div class="payment-placeholder">
-            <p>{{ getPaymentMethodMessage() }}</p>
-            <button type="button" (click)="onSubmit()" class="pay-btn">Pay Now</button>
-          </div>
-        </div>
-      </div>
+    <label>
+      CVV:
+      <input type="password" [(ngModel)]="cvv" name="cvv" required maxlength="3" />
+    </label>
+    <br />
 
-      <div class="method-option" [class.selected]="selectedPaymentMethod === 'net-banking'">
-        <div class="method-header" (click)="togglePaymentMethod('net-banking')">
-          <span class="method-icon">🏦</span>
-          <span>Net Banking</span>
-        </div>
-        <div class="method-content" [class.expanded]="selectedPaymentMethod === 'net-banking'">
-          <div class="payment-placeholder">
-            <p>{{ getPaymentMethodMessage() }}</p>
-            <button type="button" (click)="onSubmit()" class="pay-btn">Pay Now</button>
-          </div>
-        </div>
-      </div>
+    <label>
+      Name on Card:
+      <input type="text" [(ngModel)]="nameOnCard" name="nameOnCard" required />
+    </label>
+    <br />
 
-      <div class="method-option" [class.selected]="selectedPaymentMethod === 'wallet'">
-        <div class="method-header" (click)="togglePaymentMethod('wallet')">
-          <span class="method-icon">👛</span>
-          <span>Wallet</span>
-        </div>
-        <div class="method-content" [class.expanded]="selectedPaymentMethod === 'wallet'">
-          <div class="payment-placeholder">
-            <p>{{ getPaymentMethodMessage() }}</p>
-            <button type="button" (click)="onSubmit()" class="pay-btn">Pay Now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="method-option" [class.selected]="selectedPaymentMethod === 'cash-on-delivery'">
-        <div class="method-header" (click)="togglePaymentMethod('cash-on-delivery')">
-          <span class="method-icon">💵</span>
-          <span>Cash on Delivery</span>
-        </div>
-        <div class="method-content" [class.expanded]="selectedPaymentMethod === 'cash-on-delivery'">
-          <div class="payment-placeholder">
-            <p>{{ getPaymentMethodMessage() }}</p>
-            <button type="button" (click)="onSubmit()" class="pay-btn">Pay Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <button type="submit">Pay Now</button>
+  </form>
 </div>

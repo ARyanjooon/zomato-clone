@@ -1,17 +1,4 @@
-nav {
-  margin-right: 20px;
-}
-nav a {
-  text-decoration: none;
-  margin-left: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-nav a.active {
-  text-decoration: none;
-}
-
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -19,134 +6,128 @@ body {
   min-height: 100vh;
 }
 
+/* Header Styles */
 .header {
   background-color: #fff;
-  padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 0;
+  border-bottom: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 72px;
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80vw;
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
+}
+
+.left-section {
+  flex: 0 0 auto;
+  margin-right: 24px;
 }
 
 .logo {
   height: 28px;
   width: auto;
+  display: block;
+}
+
+.middle-section {
+  flex: 1;
+  max-width: 750px;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
 }
 
 .search-form {
   display: flex;
   align-items: center;
-  flex: 1;
-  max-width: 780px;
-  margin: 0 20px;
+  width: 100%;
+  height: 50px;
+  background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.08);
-  padding: 0 10px;
+  padding: 0;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
-
 .search-form:focus-within {
-  border-color: #e23744;
-  box-shadow: 0 2px 4px rgba(226, 55, 68, 0.15);
+  border-color: #bababa;
+  box-shadow: 0 2px 12px rgba(28, 28, 28, 0.15);
 }
 
 .location-container {
   display: flex;
   align-items: center;
-}
-
-.location-icon {
-  color: #e23744;
-}
-
-.search-icon {
-  color: #4f4f4f;
-  font-size: 18px;
-  margin-right: 8px;
-  background: none;
-  border: none;
+  padding: 0 12px;
+  height: 100%;
   cursor: pointer;
 }
 
-.search-icon:hover {
-  color: #e23744;
+.location-icon {
+  color: #ff7e8b;
+  font-size: 20px;
+  margin-right: 8px;
 }
 
 .location-input {
   border: none;
   outline: none;
   background: transparent;
-  font-size: 14px;
-  width: 150px;
-  padding: 0 5px;
-  color: #1c1c1c;
-  font-weight: 500;
+  font-size: 15px;
+  width: 130px;
+  color: #363636;
+  font-weight: 400;
 }
 
 .caret-icon {
-  color: #4f4f4f;
+  color: #363636;
+  font-size: 12px;
 }
 
 .separator {
   height: 20px;
   width: 1px;
-  background-color: #e8e8e8;
-  margin: 0 12px;
+  background-color: #cfcfcf;
+}
+
+.search-input-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 100%;
+}
+
+.search-icon {
+  color: #828282;
+  font-size: 20px;
+  margin-right: 8px;
 }
 
 .search-input {
-  flex: 1;
-  padding: 12px 0;
   border: none;
-  font-size: 16px;
   outline: none;
-  background-color: transparent;
-  width: 100%;
-}
-
-.search-input:focus {
-  background-color: #fff;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 24px;
-}
-
-.login-btn,
-.signup-btn {
   background: transparent;
-  border: none;
+  font-size: 15px;
+  width: 100%;
+  color: #363636;
+  font-weight: 400;
+}
+.search-input::-moz-placeholder {
   color: #828282;
-  padding: 8px 0;
-  cursor: pointer;
-  font-size: 20px;
 }
-
-.login-btn:hover,
-.signup-btn:hover {
-  color: #1c1c1c;
-}
-
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    padding: 10px;
-    gap: 10px;
-  }
-}
-.page-options {
-  background-color: #f8f8f8;
+.search-input::placeholder {
+  color: #828282;
 }
 
 .options-container {
@@ -209,6 +190,7 @@ body {
   background-color: #edf4ff;
 }
 
+/* Collections Styles */
 .collections-section {
   padding: 48px 0;
   background-color: #f8f8f8;
@@ -302,7 +284,7 @@ body {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   transition: transform 0.3s ease;
 }
 
@@ -342,4 +324,4 @@ body {
   .collection-card {
     width: 80%;
   }
-} /*# sourceMappingURL=app.component.css.map */
+}/*# sourceMappingURL=app.component.css.map */

@@ -242,6 +242,30 @@
   font-size: 16px;
 }
 
+.wallet-info {
+  padding: 16px 20px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  border: 1px solid #b0d4ff;
+  margin-bottom: 16px;
+}
+
+.wallet-info p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.sufficient-credits {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.insufficient-credits {
+  color: #dc3545;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .payment-container {
     padding: 18px;

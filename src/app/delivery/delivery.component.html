@@ -65,7 +65,7 @@
         <div *ngIf="activeFilterCategory === 'cuisines'" class="filter-section">
           <div class="cuisine-search-container">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="cuisine-search-input" placeholder="Search for cuisines" [(ngModel)]="cuisineSearchTerm">
+            <input type="text" class="cuisine-search-input" placeholder="Search for cuisines" [(ngModel)]="cuisineSearchTerm" name="cuisineSearchTerm">
           </div>
           <!-- Placeholder for the list of cuisines -->
           <p class="placeholder-text">Cuisine list will appear here.</p>

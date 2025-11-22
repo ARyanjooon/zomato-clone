@@ -1,28 +1,41 @@
 <header class="header">
   <div class="header-container">
-    <img src="assets/zomato-logo.avif" alt="Zomato Logo" class="logo">
-    <form class="search-form" *ngIf="!isProfileRoute()" (ngSubmit)="onSearch($event)">
-      <div class="location-container">
-        <i class="fas fa-map-marker-alt location-icon"></i>
-        <input type="text" value="Delhi NCR" class="location-input">
-        <i class="fas fa-caret-down caret-icon"></i>
-      </div>
-      <span class="separator"></span>
-      <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
-      <input type="text" placeholder="Search for restaurant, cuisine or a dish" class="search-input" [(ngModel)]="searchQuery">
-    </form>
-    <div class="auth-buttons">
-      <button class="login-btn" (click)="openLoginModal()">Login</button>
-      <button class="signup-btn" (click)="openSignupModal()">Sign Up</button>
+    <div class="left-section">
+      <a routerLink="/" class="logo-link">
+        <img src="assets/zomato-logo.avif" alt="Zomato Logo" class="logo">
+      </a>
+    </div>
+
+    <div class="middle-section">
+      <form class="search-form" *ngIf="!isProfileRoute()" (ngSubmit)="onSearch($event)">
+        <div class="location-container">
+          <i class="fas fa-map-marker-alt location-icon"></i>
+          <input type="text" value="Delhi NCR" class="location-input">
+          <i class="fas fa-caret-down caret-icon"></i>
+        </div>
+        <span class="separator"></span>
+        <div class="search-input-container">
+          <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
+          <input type="text" placeholder="Search for restaurant, cuisine or a dish" class="search-input"
+            [(ngModel)]="searchQuery" name="searchQuery">
+        </div>
+      </form>
+    </div>
+
+    <div class="right-section">
+      <nav class="nav-links">
+        <div class="auth-buttons">
+          <button class="login-btn" (click)="openLoginModal()">Log in</button>
+          <button class="signup-btn" (click)="openSignupModal()">Sign up</button>
+        </div>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Collection</a>
+        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      </nav>
     </div>
   </div>
-  <nav >
-    <a routerLink="/"  routerLinkActive="active">Collection</a>
-    <a routerLink="profile" routerLinkActive="active">Profile</a>
-  </nav>
 </header>
 
-<section class="page-options" *ngIf="!isProfileRoute()">
+<section class="page-options" *ngIf="!isProfileRoute() && !isRestaurantRoute()">
   <div class="options-container">
     <div class="option-item" [class.active]="activeOption === 'dining'" (click)="setActive('dining')">
       <div class="option-icon-bg dining">
@@ -48,7 +61,7 @@
 <app-login *ngIf="isLoginModalOpen" (close)="closeLoginModal()" (openSignup)="onOpenSignupFromLogin()"></app-login>
 <app-signup *ngIf="isSignupModalOpen" (close)="closeSignupModal()" (openLogin)="onOpenLoginFromSignup()"></app-signup>
 
-<router-outlet />  <!-- Angular inserts your route content here -->
+<router-outlet></router-outlet>
 
 <!-- Test backend connection -->
 <div class="backend-test">

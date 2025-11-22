@@ -15,7 +15,7 @@
   background-color: #fff;
   padding: 24px;
   border-radius: 8px;
-  width: 400px;
+  width: 450px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -48,6 +48,15 @@ h2 {
   border-radius: 6px;
   font-size: 16px;
   box-sizing: border-box;
+}
+
+/* Hide browser's default password toggle */
+input[type=password]::-webkit-password-toggle {
+  display: none;
+}
+
+input[type=password]::-ms-reveal {
+  display: none;
 }
 
 .submit-btn {
@@ -150,4 +159,29 @@ h2 {
   flex-grow: 1;
   margin-bottom: 0;
   border-radius: 0 6px 6px 0;
+}
+
+.password-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.password-input {
+  padding-right: 40px; /* Space for the toggle button */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #696969;
+  font-size: 16px;
+}
+
+.toggle-password:hover {
+  color: #1c1c1c;
 }/*# sourceMappingURL=signup.component.css.map */

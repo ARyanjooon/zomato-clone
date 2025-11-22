@@ -1,21 +1,40 @@
 <div class="modal-overlay" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="closeModal()">&times;</button>
-    <h2>Log in</h2>
-    <form>
-      <div class="phone-input-container">
-        <div class="country-code-selector">🇮🇳 +91</div>
-        <input type="tel" placeholder="Phone number" class="form-input phone-number-input">
+    <div class="modal-header">
+      <h2>Login</h2>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+    
+    <form (ngSubmit)="onLogin()">
+      <div class="input-group">
+        <input type="email" placeholder="Email" class="form-input" [(ngModel)]="loginData.email" name="email" required>
       </div>
-      <button type="submit" class="submit-btn">Send OTP</button>
+      <div class="input-group">
+        <input type="password" placeholder="Password" class="form-input" [(ngModel)]="loginData.password" name="password" required>
+      </div>
+      
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Login</span>
+        <div class="spinner" *ngIf="isLoading"></div>
+      </button>
     </form>
+
     <div class="divider">or</div>
+
     <button class="social-login-btn google">
-      <i class="fab fa-google"></i> Continue with Google
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width="20">
+      Continue with Google
     </button>
     <button class="social-login-btn email">
       <i class="fas fa-envelope"></i> Continue with Email
     </button>
-    <p class="signup-link">New to Zomato? <a (click)="onSignupClick()">Create account</a></p>
+
+    <div class="footer-text">
+      New to Zomato? <a (click)="onSignupClick()">Create account</a>
+    </div>
   </div>
 </div>
