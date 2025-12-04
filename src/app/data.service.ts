@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:8080/api/data'; // URL to your backend endpoint
+  // User Credits State
+  private userCreditsSubject = new BehaviorSubject<number>(2000);
+  userCredits$ = this.userCreditsSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor() { }
 
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getCredits(): number {
+    return this.userCreditsSubject.value;
+  }
+
+  deductCredits(amount: number): boolean {
+    const currentCredits = this.userCreditsSubject.value;
+    if (currentCredits >= amount) {
+      this.userCreditsSubject.next(currentCredits - amount);
+      return true;
+    }
+    return false;
   }
 }

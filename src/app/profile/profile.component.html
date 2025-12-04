@@ -4,7 +4,7 @@
     <div class="credits-points">
       <div class="credits">
         <i class="fas fa-coins"></i>
-        <span>Credits: 2000</span>
+        <span>Credits: {{ credits }}</span>
       </div>
       <div class="points">
         <i class="fas fa-star"></i>
@@ -13,27 +13,46 @@
     </div>
   </header>
 
-  <section class="user-info-section">
-    <div class="user-avatar">
-      <img src="assets/zomato-logo.avif" alt="User Avatar" class="avatar-img">
-    </div>
-    <div class="user-details">
-      <h2>Aryan</h2>
-      <p><strong>Email:</strong> Aryan&#64;example.com</p>
-      <p><strong>Phone:</strong> (+91) 9234328359</p>
-      <p><strong>Address:</strong> 123 street, rohini, Delhi</p>
-    </div>
-  </section>
+  <div class="profile-layout">
+    <aside class="profile-sidebar">
+      <section class="user-card">
+        <div class="user-avatar">
+          <img src="assets/zomato-logo.avif" alt="User Avatar" class="avatar-img">
+        </div>
+        <div class="user-details">
+          <h2>Aryan</h2>
+          <div class="detail-item">
+            <span class="label">Email</span>
+            <span class="value">Aryan&#64;example.com</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Phone</span>
+            <span class="value">(+91) 9234328359</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Address</span>
+            <span class="value">123 street, rohini, Delhi</span>
+          </div>
+        </div>
+      </section>
+    </aside>
 
-  <section class="cart-section">
-    <app-cart></app-cart>
-  </section>
+    <main class="profile-main">
+      <section class="cart-section">
+        <app-cart></app-cart>
+      </section>
 
-  <section class="history-section">
-    <h2>Order History</h2>
-    <div class="history-list">
-      <!-- Order history items will be populated here -->
-    </div>
-  </section>
-
+      <section class="history-section">
+        <div class="section-header">
+          <h2>Order History</h2>
+        </div>
+        <div class="history-list">
+          <!-- Order history items will be populated here -->
+          <div class="empty-state">
+            <p>No past orders found.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </div>

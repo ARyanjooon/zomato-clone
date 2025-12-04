@@ -1,11 +1,33 @@
 <div class="restaurants-container">
   <h2>Restaurants</h2>
   <div class="restaurants-grid">
-    <div class="restaurant-card" *ngFor="let restaurant of restaurants" (click)="navigateToRestaurant(restaurant.name)">
-      <img [src]="restaurant.image" [alt]="restaurant.name" class="restaurant-image">
-      <h3>{{ restaurant.name }}</h3>
-      <p>Rating: {{ restaurant.rating }}/5</p>
-      <p>Cuisine: {{ restaurant.cuisine }}</p>
+    <div *ngFor="let restaurant of restaurants" class="restaurant-card" (click)="navigateToRestaurant(restaurant.name)">
+      <div class="restaurant-img-container">
+        <img [src]="restaurant.image" [alt]="restaurant.name" class="restaurant-img">
+        <div class="offer-tag" *ngIf="restaurant.offer">{{ restaurant.offer }}</div>
+        <div class="distance-tag">{{ restaurant.distance }}</div>
+      </div>
+      <div class="restaurant-info">
+        <div class="name-rating">
+          <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+          <div class="rating-badge">
+            {{ restaurant.rating }} <i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="cuisine-cost">
+          <span class="cuisine">{{ restaurant.cuisine }}</span>
+          <span class="cost">{{ restaurant.cost }}</span>
+        </div>
+        <div class="location">
+          {{ restaurant.location }}
+        </div>
+        <hr class="divider">
+        <div class="safety-badge">
+          <img src="https://b.zmtcdn.com/data/o2_assets/0b07ef18234c6fdf9365ad1c274ae0631612687510.png" alt="Safety"
+            class="safety-icon">
+          <span>Follows all Max Safety measures to ensure your food is safe</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

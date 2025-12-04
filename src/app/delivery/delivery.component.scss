@@ -5,6 +5,7 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap; // Allow wrapping on small screens
 }
 
 .quick-filter-btn {
@@ -18,10 +19,11 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.2s;
 
   &:hover {
     box-shadow: 0 1px 4px rgba(28, 28, 28, 0.12);
+    background-color: #f8f8f8;
   }
 
   i {
@@ -32,75 +34,42 @@
 .delivery-container {
   display: flex;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
-  background-color: rgb(248, 246, 246);
-  
-}
-
-.filters-sidebar {
-  width: 250px;
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-right: 1px solid #e9ecef;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.filters-sidebar h3 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.filter-section {
-  margin-bottom: 20px;
-}
-
-.filter-section h4 {
-  margin-bottom: 10px;
-  color: #555;
-  font-size: 16px;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-bottom: 8px;
-}
-
-.checkbox-label input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2);
-}
-
-.cuisine-list {
-  list-style: none;
-  padding: 0;
-}
-
-.cuisine-item {
-  margin-bottom: 5px;
+  font-family: 'Inter', sans-serif; // Updated font
+  background-color: #fff; // Changed to white for a cleaner look, or keep light gray if preferred
 }
 
 .main-content {
   flex: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 24px 40px; // Added bottom padding
 }
 
-.inspiration-section h2 {
-  font-size: 32px;
-  font-weight: 500;
-  color: #1c1c1c;
-  margin: 24px 0;
+// Animation Keyframes
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Inspiration Section
+.inspiration-section {
+  margin-bottom: 40px;
+  animation: fadeIn 0.6s ease-out;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin: 24px 0;
+  }
 }
 
 .inspiration-slider {
   position: relative;
-  
+  background-color: #f8f8f8; // Subtle background for the slider area
+  padding: 30px 0;
+  margin: 0 -24px; // Extend to full width
+  padding-left: 24px; // Restore padding
 }
 
 .inspiration-grid {
@@ -108,13 +77,13 @@
   gap: 40px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-bottom: 15px; // Add some space for the box-shadow on hover
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  padding-bottom: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .inspiration-grid::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
 
 .inspiration-card {
@@ -122,10 +91,10 @@
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   flex-shrink: 0;
-}
 
-.inspiration-card:hover {
-  transform: scale(1.05);
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .card-image {
@@ -144,37 +113,261 @@
   color: #363636;
 }
 
+// Slider Buttons
 .slider-btn {
   position: absolute;
   top: 50%;
-  transform: translateY(-90%); // Adjust to center on the circular images
+  transform: translateY(-50%);
   background-color: white;
   border: 1px solid #e8e8e8;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.08);
-  font-size: 16px;
+  font-size: 14px;
   color: #1c1c1c;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(28, 28, 28, 0.15);
+  }
 }
 
-.slider-btn:hover {
-  box-shadow: 0 2px 12px rgba(28, 28, 28, 0.15);
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+// Top Brands Section
+.top-brands-section {
+  margin-bottom: 40px;
+  animation: fadeIn 0.8s ease-out;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin-bottom: 32px;
+  }
 }
 
-.prev-btn {
-  left: -20px;
+.brands-grid {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scrollbar-width: none; // Hide scrollbar
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.next-btn {
-  right: -20px;
+.brand-card {
+  text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 150px;
+
+  .brand-img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+  }
+
+  .brand-img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  .brand-time {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #363636;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .brand-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
+// Delivery Restaurants Section
+.delivery-restaurants-section {
+  animation: fadeIn 1s ease-out;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin-bottom: 24px;
+  }
+}
+
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.restaurant-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  border: 1px solid transparent;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(28, 28, 28, 0.08);
+    border-color: #e8e8e8;
+  }
+
+  .restaurant-img-container {
+    position: relative;
+    height: 248px;
+    width: 100%;
+
+    .restaurant-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .offer-tag {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      background: #256fef;
+      color: #fff;
+      padding: 2px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    .delivery-time-tag {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #363636;
+    }
+  }
+
+  .restaurant-info {
+    padding: 12px;
+
+    .name-rating {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+
+      .restaurant-name {
+        font-size: 18px;
+        font-weight: 500;
+        color: #1c1c1c;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70%;
+      }
+
+      .rating-badge {
+        background-color: #24963f;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        i { font-size: 10px; }
+      }
+    }
+
+    .cuisine-cost {
+      display: flex;
+      justify-content: space-between;
+      color: #696969;
+      font-size: 14px;
+      margin-bottom: 12px;
+      
+      .cuisine {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60%;
+      }
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 10px 0;
+    }
+
+    .safety-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      .safety-icon {
+        width: 40px;
+        height: auto;
+      }
+
+      span {
+        font-size: 11px;
+        color: #9c9c9c;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// Modal Styles (Kept largely the same but cleaned up)
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -186,11 +379,12 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .modal-content {
-  background-color: #f8f8f8;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 8px;
   width: 700px;
   height: 500px;
   max-width: 95vw;
@@ -219,25 +413,19 @@
     font-size: 28px;
     cursor: pointer;
     color: #696969;
-    padding: 0;
-    line-height: 1;
   }
 }
 
 .modal-body {
-  padding: 0;
-  overflow-y: auto;
   display: flex;
   flex-grow: 1;
-  min-height: 0; /* Fix for flexbox overflow issue in some browsers */
+  overflow: hidden;
 }
 
 .filter-categories {
-  width: 180px;
-  background-color: #fff;
-  padding: 16px 0;
+  width: 200px;
+  background-color: #f8f8f8;
   border-right: 1px solid #e0e0e0;
-  flex-shrink: 0;
   overflow-y: auto;
 }
 
@@ -247,117 +435,23 @@
   background: none;
   border: none;
   text-align: left;
-  padding: 28px 24px;
+  padding: 20px 24px;
   font-size: 16px;
-  cursor: pointer;
   color: #363636;
-  border-left: 3px solid transparent;
+  cursor: pointer;
+  border-left: 4px solid transparent;
 
   &.active {
-    background-color: #f8f8f8;
-    border-left-color: #e23744;
-    font-weight: 500;
+    background-color: #fff;
+    border-left-color: #ef4f5f;
+    font-weight: 600;
   }
 }
 
 .filter-options {
+  flex: 1;
   padding: 24px;
-  flex-grow: 1;
   overflow-y: auto;
-}
-
-.cuisine-search-container {
-  position: relative;
-  margin-bottom: 20px;
-
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #828282;
-  }
-
-  .cuisine-search-input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    border: 1px solid #cfcfcf;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box; // Ensures padding is included in the width, preventing overflow
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-
-    &:focus {
-      outline: none;
-      border-color: #e23744;
-      box-shadow: 0 0 0 2px rgba(226, 55, 68, 0.2);
-    }
-  }
-}
-
-.placeholder-text {
-  color: #828282;
-}
-
-.rating-subtitle {
-  color: #696969;
-  margin-bottom: 16px;
-}
-
-.rating-buttons {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.rating-btn {
-  background-color: #fff;
-  border: 1px solid #cfcfcf;
-  border-radius: 8px;
-  padding: 10px 16px;
-  font-size: 16px;
-  color: #363636;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 1px 4px rgba(28, 28, 28, 0.12);
-  }
-
-  &.active {
-    background-color: #fceec0;
-    border-color: #f5c132;
-    color: #af7c00;
-    font-weight: 500;
-  }
-}
-
-.filter-section h3 {
-  margin-top: 0;
-  margin-bottom: 16px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #363636;
-}
-
-.sort-options {
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-}
-
-.sort-option {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-size: 16px;
-  cursor: pointer;
-
-  input[type="radio"] {
-    accent-color: #e23744;
-    width: 18px;
-    height: 18px;
-  }
 }
 
 .modal-footer {
@@ -368,57 +462,39 @@
   border-top: 1px solid #e0e0e0;
 }
 
-.clear-btn, .apply-btn {
-  padding: 12px 24px;
-  border: none;
-  padding: 20px;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
 .clear-btn {
-  background-color: #fff;
-  color: #828282;
-  border: 1px solid #cfcfcf;
-
-  &:hover {
-    background-color: #f8f8f8;
-  }
+  background: none;
+  border: none;
+  color: #696969;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .apply-btn {
+  background-color: #ef4f5f;
   color: #fff;
-  background-color: #e23744;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 
   &:hover {
-    background-color: #c32d39;
+    background-color: #e03e4e;
   }
 }
 
+// Responsive
 @media (max-width: 768px) {
-  .delivery-container {
-    flex-direction: column;
+  .inspiration-grid, .brands-grid {
+    gap: 20px;
   }
 
-  .filters-sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
+  .restaurants-grid {
+    grid-template-columns: 1fr;
   }
-
-  .inspiration-grid {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
-
-  .inspiration-card {
-    flex: 1 1 150px;
-  }
-
+  
   .slider-btn {
-    display: none;
+    display: none; // Hide slider buttons on mobile
   }
 }

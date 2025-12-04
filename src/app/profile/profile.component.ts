@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart/cart.component';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +13,18 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   activeTab: string = 'cart';
+  credits: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
     // Set default active tab based on current route
     this.updateActiveTabFromRoute();
+
+    // Subscribe to credits
+    this.dataService.userCredits$.subscribe(credits => {
+      this.credits = credits;
+    });
   }
 
   setActiveTab(tab: string): void {

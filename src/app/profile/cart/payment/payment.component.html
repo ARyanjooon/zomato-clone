@@ -1,32 +1,196 @@
-<div class="payment-container">
-  <h2>Payment Page</h2>
-  <p>Total Price: ₹{{ totalPrice }}</p>
+<div class="payment-page-container">
+  <div class="payment-header">
+    <h1>Payment Options</h1>
+    <p>{{ paymentMethods.length }} payment methods available</p>
+  </div>
 
-  <form (ngSubmit)="onSubmit()">
-    <label>
-      Card Number:
-      <input type="text" [(ngModel)]="cardNumber" name="cardNumber" required maxlength="16" />
-    </label>
-    <br />
+  <div class="payment-layout">
+    <!-- Left Column: Payment Interface -->
+    <div class="payment-interface-card">
+      <div class="payment-sidebar">
+        <div *ngFor="let method of paymentMethods" class="method-item" [class.active]="selectedMethodId === method.id"
+          (click)="selectMethod(method.id)">
+          <div class="method-icon">
+            <i [class]="method.icon"></i>
+          </div>
+          <div class="method-details">
+            <span class="method-name">{{ method.name }}</span>
+            <span class="method-desc" *ngIf="method.description">{{ method.description }}</span>
+          </div>
+          <i class="fas fa-chevron-right arrow-icon" *ngIf="selectedMethodId !== method.id"></i>
+        </div>
+      </div>
 
-    <label>
-      Expiry Date:
-      <input type="text" [(ngModel)]="expiryDate" name="expiryDate" required placeholder="MM/YY" maxlength="5" />
-    </label>
-    <br />
+      <div class="payment-content-area">
+        <!-- UPI Section -->
+        <div *ngIf="selectedMethodId === 'upi'" class="payment-section fade-in">
+          <div class="section-header">
+            <h2>Pay via UPI</h2>
+            <div class="payu-badge">
+              <span>Secured by</span>
+              <span class="payu-text">PayU</span>
+            </div>
+          </div>
 
-    <label>
-      CVV:
-      <input type="password" [(ngModel)]="cvv" name="cvv" required maxlength="3" />
-    </label>
-    <br />
+          <div class="upi-apps-grid">
+            <div *ngFor="let app of upiApps" class="upi-app-card" [class.selected]="selectedUpiApp === app.id"
+              (click)="selectUpiApp(app.id)">
+              <div class="app-logo-placeholder">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <span>{{ app.name }}</span>
+              <i class="fas fa-check-circle check-icon" *ngIf="selectedUpiApp === app.id"></i>
+            </div>
+            <div class="upi-app-card add-new">
+              <div class="app-logo-placeholder plus">
+                <i class="fas fa-plus"></i>
+              </div>
+              <span>Add New UPI ID</span>
+            </div>
+          </div>
 
-    <label>
-      Name on Card:
-      <input type="text" [(ngModel)]="nameOnCard" name="nameOnCard" required />
-    </label>
-    <br />
+          <div class="upi-form">
+            <label>Or enter UPI ID</label>
+            <div class="input-group">
+              <input type="text" placeholder="e.g. name@upi" [(ngModel)]="upiId">
+              <button class="verify-btn">Verify</button>
+            </div>
+          </div>
 
-    <button type="submit">Pay Now</button>
-  </form>
+          <button class="pay-now-btn" [class.loading]="isProcessing" (click)="payWithPayU()">
+            <span *ngIf="!isProcessing">Pay ₹{{ totalPrice }} via PayU</span>
+            <span *ngIf="isProcessing"><i class="fas fa-spinner fa-spin"></i> Redirecting to PayU...</span>
+          </button>
+        </div>
+
+        <!-- Cards Section -->
+        <div *ngIf="selectedMethodId === 'cards'" class="payment-section fade-in">
+          <h2>Credit & Debit Cards</h2>
+          <div class="card-form">
+            <div class="form-group full-width">
+              <label>Card Number</label>
+              <input type="text" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" [(ngModel)]="cardNumber">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Valid Thru</label>
+                <input type="text" placeholder="MM/YY" maxlength="5" [(ngModel)]="expiryDate">
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="password" placeholder="123" maxlength="3" [(ngModel)]="cvv">
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label>Name on Card</label>
+              <input type="text" placeholder="Name as on card" [(ngModel)]="nameOnCard">
+            </div>
+            <button class="pay-now-btn" [class.loading]="isProcessing" (click)="processGenericPayment()">
+              <span *ngIf="!isProcessing">Pay ₹{{ totalPrice }}</span>
+              <span *ngIf="isProcessing"><i class="fas fa-spinner fa-spin"></i> Processing...</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Credits Section -->
+        <div *ngIf="selectedMethodId === 'credits'" class="payment-section fade-in">
+          <h2>Zomato Credits</h2>
+          <div class="credits-info-card">
+            <div class="credits-header">
+              <div class="icon-circle">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="credits-text">
+                <h3>Available Balance</h3>
+                <p class="balance">₹{{ userCredits }}</p>
+              </div>
+            </div>
+
+            <div class="credits-status" [class.sufficient]="userCredits >= totalPrice"
+              [class.insufficient]="userCredits < totalPrice">
+              <i class="fas" [class.fa-check-circle]="userCredits >= totalPrice"
+                [class.fa-times-circle]="userCredits < totalPrice"></i>
+              <span *ngIf="userCredits >= totalPrice">Sufficient balance to pay for this order.</span>
+              <span *ngIf="userCredits < totalPrice">Insufficient balance. Please add more credits or choose another
+                method.</span>
+            </div>
+
+            <button class="pay-now-btn" [class.loading]="isProcessing" [disabled]="userCredits < totalPrice"
+              (click)="payWithCredits()">
+              <span *ngIf="!isProcessing">Pay ₹{{ totalPrice }} using Credits</span>
+              <span *ngIf="isProcessing"><i class="fas fa-spinner fa-spin"></i> Processing...</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Netbanking Section -->
+        <div *ngIf="selectedMethodId === 'netbanking'" class="payment-section fade-in">
+          <h2>Netbanking</h2>
+          <div class="bank-grid">
+            <div class="bank-item">HDFC</div>
+            <div class="bank-item">ICICI</div>
+            <div class="bank-item">SBI</div>
+            <div class="bank-item">Axis</div>
+            <div class="bank-item">Kotak</div>
+            <div class="bank-item">More Banks <i class="fas fa-chevron-down"></i></div>
+          </div>
+        </div>
+
+        <!-- Razorpay Section -->
+        <div *ngIf="selectedMethodId === 'razorpay'" class="payment-section fade-in">
+          <h2>Razorpay</h2>
+          <div class="cod-info">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="Razorpay"
+              style="max-width: 150px; margin-bottom: 20px;">
+            <p>Pay securely using Razorpay (Cards, UPI, Netbanking, Wallets).</p>
+            <button class="pay-now-btn" [class.loading]="isProcessing" (click)="payWithRazorpay()">
+              <span *ngIf="!isProcessing">Pay ₹{{ totalPrice }} with Razorpay</span>
+              <span *ngIf="isProcessing"><i class="fas fa-spinner fa-spin"></i> Processing...</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- COD Section -->
+        <div *ngIf="selectedMethodId === 'cod'" class="payment-section fade-in">
+          <h2>Cash on Delivery</h2>
+          <div class="cod-info">
+            <img src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2cae4583865ae74dd41585691142.png" alt="COD">
+            <p>Pay cash at the time of delivery. We recommend using online payment for contactless delivery.</p>
+            <button class="pay-now-btn" [class.loading]="isProcessing" (click)="processGenericPayment()">
+              <span *ngIf="!isProcessing">Place Order</span>
+              <span *ngIf="isProcessing"><i class="fas fa-spinner fa-spin"></i> Placing Order...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Order Summary -->
+    <div class="order-summary-sidebar">
+      <h3>Order Summary</h3>
+      <div class="bill-details">
+        <div class="bill-row">
+          <span>Item Total</span>
+          <span>₹{{ totalPrice - 50 - 45 }}</span>
+        </div>
+        <div class="bill-row">
+          <span>Delivery Partner Fee</span>
+          <span>₹45</span>
+        </div>
+        <div class="bill-row">
+          <span>Platform Fee</span>
+          <span>₹5</span>
+        </div>
+        <div class="bill-row">
+          <span>GST and Restaurant Charges</span>
+          <span>₹50</span>
+        </div>
+        <hr>
+        <div class="bill-row total">
+          <span>To Pay</span>
+          <span>₹{{ totalPrice }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

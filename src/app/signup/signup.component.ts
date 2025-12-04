@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +27,7 @@ export class SignupComponent {
   isLoading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   closeModal(): void {
     this.close.emit();
@@ -65,19 +65,13 @@ export class SignupComponent {
     }
 
     this.isLoading = true;
-    this.http.post('http://localhost:62195/api/auth/register', this.signupData).subscribe({
-      next: (response: any) => {
-        this.isLoading = false;
-        alert('Signup successful! Please login.');
-        console.log('Signup response:', response);
-        this.closeModal();
-        this.openLogin.emit(); // Automatically open login after signup
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.errorMessage = error.error?.error || 'Signup failed. Please try again.';
-        console.error('Signup error:', error);
-      }
-    });
+
+    setTimeout(() => {
+      this.isLoading = false;
+      alert('Signup successful! Please login.');
+      console.log('Signup response:', { message: 'Success', user: this.signupData });
+      this.closeModal();
+      this.openLogin.emit(); // Automatically open login after signup
+    }, 1500);
   }
 }

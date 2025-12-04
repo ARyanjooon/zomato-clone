@@ -5,7 +5,6 @@ import { SignupComponent } from './signup/signup.component';
 import { RouterModule, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from './cart.service';
-import { DataService } from './data.service';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -23,11 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
   activeOption: string = 'dining';
   searchQuery: string = '';
   cartItemCount: number = 0;
-  backendMessage: string = '';
   private routerSubscription: Subscription | null = null;
   private cartSubscription: Subscription | null = null;
 
-  constructor(private router: Router, private cartService: CartService, private dataService: DataService) {}
+  constructor(private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.updateActiveOptionFromRoute();
@@ -132,16 +130,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateToCart(): void {
     this.router.navigate(['/profile/cart']);
-  }
-
-  testBackend(): void {
-    this.dataService.getData().subscribe({
-      next: (response) => {
-        this.backendMessage = response.message;
-      },
-      error: (error) => {
-        this.backendMessage = 'Error connecting to backend: ' + error.message;
-      }
-    });
   }
 }

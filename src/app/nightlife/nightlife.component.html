@@ -1,3 +1,13 @@
+<div class="quick-filters-container">
+  <button class="quick-filter-btn" (click)="openFilterModal()">
+    <i class="fas fa-filter"></i> Filters
+  </button>
+  <button class="quick-filter-btn">Gold <i class="fas fa-crown" style="color: gold;"></i></button>
+  <button class="quick-filter-btn">Distance <i class="fas fa-chevron-down"></i></button>
+  <button class="quick-filter-btn">Rating 4.0+</button>
+  <button class="quick-filter-btn">Pubs & Bars</button>
+</div>
+
 <section class="collections-section">
   <div class="collections-container">
     <div class="collections-header">
@@ -6,7 +16,8 @@
       <a href="#">All collections in Delhi NCR</a>
     </div>
     <div class="collections-slider" #sliderContainer>
-      <button class="slider-btn prev-btn" (click)="scrollCollections('prev')"><i class="fas fa-chevron-left"></i></button>
+      <button class="slider-btn prev-btn" (click)="scrollCollections('prev')"><i
+          class="fas fa-chevron-left"></i></button>
       <div class="collections-grid" #collectionsGrid>
         <div class="collection-card">
           <img src="assets/insta-worthy-spots.webp" alt="Insta-worthy spots">
@@ -65,7 +76,44 @@
           </div>
         </div>
       </div>
-      <button class="slider-btn next-btn" (click)="scrollCollections('next')"><i class="fas fa-chevron-right"></i></button>
+      <button class="slider-btn next-btn" (click)="scrollCollections('next')"><i
+          class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<section class="nightlife-restaurants-section">
+  <div class="container">
+    <h2>Nightlife Restaurants in Delhi NCR</h2>
+    <div class="restaurants-grid">
+      <div *ngFor="let restaurant of nightlifeRestaurants" class="restaurant-card">
+        <div class="restaurant-img-container">
+          <img [src]="restaurant.image" [alt]="restaurant.name" class="restaurant-img">
+          <div class="offer-tag" *ngIf="restaurant.offer">{{ restaurant.offer }}</div>
+          <div class="distance-tag">{{ restaurant.distance }}</div>
+        </div>
+        <div class="restaurant-info">
+          <div class="name-rating">
+            <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+            <div class="rating-badge">
+              {{ restaurant.rating }} <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <div class="cuisine-cost">
+            <span class="cuisine">{{ restaurant.cuisine }}</span>
+            <span class="cost">{{ restaurant.cost }}</span>
+          </div>
+          <div class="location">
+            {{ restaurant.location }}
+          </div>
+          <hr class="divider">
+          <div class="safety-badge">
+            <img src="https://b.zmtcdn.com/data/o2_assets/0b07ef18234c6fdf9365ad1c274ae0631612687510.png" alt="Safety"
+              class="safety-icon">
+            <span>Follows all Max Safety measures to ensure your food is safe</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
